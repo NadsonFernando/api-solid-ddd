@@ -5,6 +5,8 @@ import { authenticate } from "./useCases/UserAuthUseCase";
 import { create } from "./useCases/UserCreateUseCase";
 import { getCurrentUser } from "./useCases/UserGetCurrentUseCase";
 
+import { requestMiddleware } from "../../middlewares";
+
 export class UserRoute implements IRoute {
   register() {
     app.post("/api/users/login", (request, response) => {
@@ -15,7 +17,7 @@ export class UserRoute implements IRoute {
       return create.handle(request, response);
     });
 
-    app.get("/api/user", (request, response) => {
+    app.get("/api/user", requestMiddleware.execute, (request, response) => {
       return getCurrentUser.handle(request, response);
     });
   }
