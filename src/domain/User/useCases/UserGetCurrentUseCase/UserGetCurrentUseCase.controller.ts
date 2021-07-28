@@ -9,6 +9,14 @@ export class UserGetCurrentUseCaseController {
   }
 
   async handle(request: Request, response: Response): Promise<Response> {
-    return null;
+    try {
+      const user = await this.useCase.execute(request);
+
+      return response.status(200).send(user);
+    } catch (err) {
+      return response.status(400).json({
+        message: err.message,
+      });
+    }
   }
 }

@@ -1,5 +1,5 @@
+import { Request } from "express";
 import { IUserRepository } from "../../repository";
-import { User } from "../../user.model";
 
 export class UserGetCurrentUseCase {
   private repository: IUserRepository;
@@ -8,5 +8,13 @@ export class UserGetCurrentUseCase {
     this.repository = repository;
   }
 
-  async execute(user: User) {}
+  async execute(request: Request) {
+    const { user } = request.session;
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return user;
+  }
 }

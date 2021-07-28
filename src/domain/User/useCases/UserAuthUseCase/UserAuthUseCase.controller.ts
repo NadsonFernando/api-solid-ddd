@@ -14,7 +14,8 @@ export class UserAuthUseCaseController {
     try {
       const { token, user } = await this.useCase.execute(email, password);
 
-      //request.session?.user = user;
+      delete user.dataValues.password;
+      request.session.user = user;
 
       return response.status(200).send({ token });
     } catch (err) {
