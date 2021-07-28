@@ -22,7 +22,6 @@ export class UserAuthUseCase {
     }
 
     const { id } = user.dataValues;
-
     const isValid = await bcrypt.compare(password, user.dataValues.password);
 
     if (!isValid) {
@@ -39,6 +38,6 @@ export class UserAuthUseCase {
       }
     );
 
-    return token;
+    return { token, user };
   }
 }

@@ -12,7 +12,9 @@ export class UserAuthUseCaseController {
     const { email, password } = request.body;
 
     try {
-      const token = await this.useCase.execute(email, password);
+      const { token, user } = await this.useCase.execute(email, password);
+
+      //request.session?.user = user;
 
       return response.status(200).send({ token });
     } catch (err) {

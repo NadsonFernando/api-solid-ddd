@@ -3,6 +3,7 @@ import { app } from "../../server";
 
 import { authenticate } from "./useCases/UserAuthUseCase";
 import { create } from "./useCases/UserCreateUseCase";
+import { getCurrentUser } from "./useCases/UserGetCurrentUseCase";
 
 export class UserRoute implements IRoute {
   register() {
@@ -12,6 +13,10 @@ export class UserRoute implements IRoute {
 
     app.post("/api/users", (request, response) => {
       return create.handle(request, response);
+    });
+
+    app.get("/api/user", (request, response) => {
+      return getCurrentUser.handle(request, response);
     });
   }
 }

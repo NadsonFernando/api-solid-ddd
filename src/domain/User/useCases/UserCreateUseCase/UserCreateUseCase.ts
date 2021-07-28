@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import { IUserRepository } from "../../repository";
 import { User } from "../../user.model";
 
@@ -17,6 +19,13 @@ export class UserCreateUseCase {
       throw new Error("User already exists.");
     }
 
+    const hash = await bcrypt.hash(user.password, 6);
+
+    if (!hash) {
+      throw new Error("Error generating hash.");
+    }
+
+    user.password = hash;
     this.repository.create(user);
   }
 }
