@@ -28,8 +28,4 @@ export class UserRepository implements IUserRepository {
       throw new Error("Error creating user");
     }
   }
-
-  authenticate(email: string, password: string): void {
-    console.log({ email, password });
-  }
 }

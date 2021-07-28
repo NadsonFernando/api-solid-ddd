@@ -1,7 +1,7 @@
 import { User } from "../user.model";
+import { UserDTO } from "../user.dto";
 
 export interface IUserRepository {
-  findOne(query): Promise<User>;
+  findOne(query: object): Promise<UserDTO>;
   create(user: User): void;
-  authenticate(email: string, password: string): void;
 }

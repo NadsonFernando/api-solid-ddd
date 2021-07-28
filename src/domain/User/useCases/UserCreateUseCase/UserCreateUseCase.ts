@@ -17,6 +17,6 @@ export class UserCreateUseCase {
       throw new Error("User already exists.");
     }
 
-    await this.repository.create(user);
+    this.repository.create(user);
   }
 }

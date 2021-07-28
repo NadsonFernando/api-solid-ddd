@@ -8,9 +8,17 @@ export class UserAuthUseCaseController {
     this.useCase = useCase;
   }
 
-  handle(request: Request, response: Response): void {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
-    this.useCase.execute(email, password);
+    try {
+      const token = await this.useCase.execute(email, password);
+
+      return response.status(200).send({ token });
+    } catch (err) {
+      return response.status(400).json({
+        message: err.message,
+      });
+    }
   }
 }
