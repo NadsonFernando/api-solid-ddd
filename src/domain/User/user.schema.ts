@@ -20,6 +20,12 @@ const UserSchema = database.define(Schema.USER, {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  image: {
+    type: Sequelize.STRING,
+  },
+  bio: {
+    type: Sequelize.STRING,
+  },
 });
 
 export { UserSchema };

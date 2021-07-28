@@ -20,5 +20,9 @@ export class UserRoute implements IRoute {
     app.get("/api/user", requestMiddleware.execute, (request, response) => {
       return getCurrentUser.handle(request, response);
     });
+
+    app.put("/api/user", requestMiddleware.execute, (request, response) => {
+      return getCurrentUser.handle(request, response);
+    });
   }
 }
