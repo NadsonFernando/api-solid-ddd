@@ -14,7 +14,7 @@ export class UserRepository implements IUserRepository {
   async create(user: User) {
     const created = await UserSchema.create(user);
 
-    if (!!created) {
+    if (!created) {
       throw new Error("Error creating user.");
     }
   }
